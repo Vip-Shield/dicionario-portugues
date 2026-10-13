@@ -1,7 +1,7 @@
 {
-  "name": "Dicionário Jurídico",
-  "short_name": "Dic. Jurídico",
-  "description": "Seu dicionário pessoal para termos jurídicos e anotações forenses.",
+  "name": "Dicionário Português",
+  "short_name": "Dic. Português",
+  "description": "Seu dicionário pessoal para palavras portuguesas e anotações diversas.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f4f6f7",

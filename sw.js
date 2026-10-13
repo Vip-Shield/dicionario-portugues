@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dic-juridico-v1';
+const CACHE_NAME = 'dic-portugues-v1';
 const FILES_TO_CACHE = [
   './',
   './index.html',
