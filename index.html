@@ -6,9 +6,8 @@
     <title>Dicionário Português</title>
     <link rel="shortcut icon" type="imagex/png" href="por.ico">
 
-
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">    
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">    
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -174,7 +173,6 @@
             z-index: 10;
         }
 
-        /* Modificações para a barra de busca e botão de limpar */
         .search-wrapper {
             position: relative;
             width: 100%;
@@ -224,7 +222,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* Desloca o texto para a esquerda quando ativo */
         .word-item.show-actions .word-body {
             transform: translateX(-120px);
         }
@@ -239,7 +236,6 @@
             transition: right 0.3s ease;
         }
 
-        /* Revela os botões trazendo-os para a tela */
         .word-item.show-actions .action-btns {
             right: 0;
         }
@@ -276,7 +272,6 @@
             line-height: 1.5;
         }
 
-        /* Modificação para limitar o texto a 2 linhas por padrão */
         .word-meaning.clamp {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -354,7 +349,6 @@
 </div>
 
 <script>
-    // Usando a nova chave do Local Storage
     let dictionary = JSON.parse(localStorage.getItem('dicionario_portugues')) || [];
     let editId = null;
 
@@ -369,7 +363,6 @@
         document.getElementById('menu-dropdown').classList.toggle('show');
     }
 
-    // Fecha o menu se clicar fora dele
     window.addEventListener('click', function(e) {
         if (!e.target.matches('.btn-menu')) {
             const dropdown = document.getElementById('menu-dropdown');
@@ -380,7 +373,6 @@
     });
 
     function saveToStorage() {
-        // Salvando com a nova chave do Local Storage
         localStorage.setItem('dicionario_portugues', JSON.stringify(dictionary));
     }
 
@@ -396,7 +388,7 @@
         );
 
         if (filtered.length === 0) {
-            wordsList.innerHTML = '<p class="no-results">Nenhuma palavra encontrado.</p>';
+            wordsList.innerHTML = '<p class="no-results">Nenhuma palavra encontrada.</p>';
             return;
         }
 
@@ -415,12 +407,10 @@
                 </div>
             `;
 
-            // Alternar visibilidade ao clicar no item
             div.addEventListener('click', function() {
                 this.classList.toggle('show-actions');
             });
 
-            // Suporte para o gesto de arrastar para o lado (Swipe)
             let touchstartX = 0;
             let touchendX = 0;
 
@@ -430,11 +420,9 @@
 
             div.addEventListener('touchend', function(e) {
                 touchendX = e.changedTouches[0].screenX;
-                // Arrastou para a esquerda -> Revela os ícones
                 if (touchstartX - touchendX > 40) {
                     this.classList.add('show-actions');
                 }
-                // Arrastou para a direita -> Oculta os ícones
                 if (touchendX - touchstartX > 40) {
                     this.classList.remove('show-actions');
                 }
@@ -472,7 +460,7 @@
         vocabForm.reset();
         editId = null;
         formTitle.textContent = "Cadastrar Nova Palavra";
-        submitBtn.textContent = "Salvar Palavra";
+        submitBtn.textContent = "Salvar Termo";
         submitBtn.style.backgroundColor = "var(--accent)";
     }
 
@@ -513,7 +501,7 @@
 
     clearSearchBtn.addEventListener('click', () => {
         searchInput.value = '';
-        clearSearchBtn.style.display = 'none';
+    clearSearchBtn.style.display = 'none';
         renderWords('');
         searchInput.focus();
     });
@@ -526,7 +514,6 @@
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dictionary));
         const downloadAnchorNode = document.createElement('a');
         downloadAnchorNode.setAttribute("href", dataStr);
-        // Novo nome do arquivo de backup
         downloadAnchorNode.setAttribute("download", "dicionario_portugues_backup.json");
         document.body.appendChild(downloadAnchorNode);
         downloadAnchorNode.click();
@@ -561,7 +548,7 @@
 </script>
 
 <script>
-    // Registra o Service Worker para habilitar a instalação e o modo offline
+    // Registro seguro do Service Worker para habilitar o PWA no celular
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./sw.js')
